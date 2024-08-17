@@ -12,6 +12,8 @@ import pageObject.PracticeFromPageFactory;
 
 public class PraticeFromFabric extends BaseClass {
     static PracticeFromPageFactory formFactory;
+    User testUser;
+    User defaultUser = new User();
 
     @BeforeClass
     public static void beforeTest() {
@@ -20,6 +22,9 @@ public class PraticeFromFabric extends BaseClass {
     }
     @Test
     public void test1() {
-        formFactory.completeForm(new User());
+        testUser = new User();
+        testUser.setName("Nicola");
+        formFactory.completeForm(testUser);
+        assertNotEquals(defaultUser.getName(),testUser.getName());
     }
 }
