@@ -1,5 +1,6 @@
 package pageObject;
 
+import data.User;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +22,7 @@ public class PracticeForm {
         driver.findElement(firstName).sendKeys(name);
     }
 
-    public void completForm(String name, String lastName, String email, String gender, String tel) {
+    public void completeForm(String name, String lastName, String email, String gender, String tel) {
         driver.findElement(firstName).sendKeys(name);
         driver.findElement(this.lastName).sendKeys(lastName);
         driver.findElement(this.emailAdress).sendKeys(email);
@@ -36,6 +37,14 @@ public class PracticeForm {
                 l.click();
             }
         }
+    }
+
+    public void completeForm(User user) {
+        driver.findElement(this.firstName).sendKeys(user.getName());
+        driver.findElement(this.lastName).sendKeys(user.getLastName());
+        driver.findElement(this.emailAdress).sendKeys(user.getEmail());
+        changeGender(user.getGender());
+        driver.findElement(this.userNumber).sendKeys(user.getTelephone());
     }
 
 

@@ -1,6 +1,9 @@
 package org.example;
 
 import config.BaseClass;
+import data.DataProviderUsers;
+import data.User;
+import io.cucumber.java.AfterAll;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,10 +17,11 @@ public class PracticeFormTest extends BaseClass {
         driver.get("https://demoqa.com/automation-practice-form");
         practiceForm = new PracticeForm(driver);
     }
-//    @Before
-//    public void beforeTest() {
-//        driver.navigate().refresh();
-//    }
+    @Before
+    public void beforeTest() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.navigate().refresh();
+    }
 
     @Test
     public void fillFirstName_ok() {
@@ -26,7 +30,20 @@ public class PracticeFormTest extends BaseClass {
 
     @Test
     public void fillFullForm_ok() {
-        practiceForm.completForm("Vlad","Shushpan","email@madilrpod.net","Male","334432");
+        practiceForm.completeForm("Vlad","Shushpan","email@madilrpod.net","Male","334432");
+    }
+    @Test
+    public void newUser_OK() {
+        practiceForm.completeForm(new User());
+    }
+    @Test
+    public void test4() {
+        practiceForm.completeForm(DataProviderUsers.getValidUser());
     }
 
+    @AfterAll
+    public void afterAllTests() throws InterruptedException {
+
+        driver.navigate().refresh();
+    }
 }
